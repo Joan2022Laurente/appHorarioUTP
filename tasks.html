@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tareas - UniSchedule AI</title>
+    <meta
+      name="description"
+      content="Gestiona tus tareas y proyectos universitarios"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <link rel="stylesheet" href="styles/common.css" />
+    <link rel="stylesheet" href="styles/tasks.css" />
+
+    <meta name="theme-color" content="#6366f1" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="page-header">
+          <h1>Mis Tareas</h1>
+          <button class="btn btn-primary" onclick="openAddTaskModal()">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                fill="currentColor"
+              />
+            </svg>
+            Nueva Tarea
+          </button>
+        </div>
+
+        <div id="tasks-content">
+          <div class="empty-state">
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                fill="currentColor"
+              />
+            </svg>
+            <h3>No tienes tareas pendientes</h3>
+            <p>
+              Agrega tus primeras tareas para mantener un seguimiento de tus
+              proyectos académicos
+            </p>
+            <button class="btn btn-outline" onclick="openAddTaskModal()">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                  fill="currentColor"
+                />
+              </svg>
+              Agregar Primera Tarea
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    Updated modal structure to use custom CSS classes
+    <div class="modal" id="addTaskModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Nueva Tarea</h3>
+          <button class="modal-close" onclick="closeAddTaskModal()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="add-task-form">
+            <div class="form-group">
+              <label for="task-title">Título de la Tarea</label>
+              <input type="text" id="task-title" required />
+            </div>
+            <div class="form-group">
+              <label for="task-course">Curso</label>
+              <select id="task-course">
+                <option value="">Seleccionar curso</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-due-date">Fecha de Entrega</label>
+              <input type="date" id="task-due-date" />
+            </div>
+            <div class="form-group">
+              <label for="task-priority">Prioridad</label>
+              <select id="task-priority">
+                <option value="low">Baja</option>
+                <option value="medium" selected>Media</option>
+                <option value="high">Alta</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-description">Descripción</label>
+              <textarea id="task-description" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline"
+            onclick="closeAddTaskModal()"
+          >
+            Cancelar
+          </button>
+          <button type="submit" form="add-task-form" class="btn btn-primary">
+            Agregar Tarea
+          </button>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
