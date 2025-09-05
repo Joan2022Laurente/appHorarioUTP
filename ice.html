@@ -37,13 +37,23 @@
 
     <main class="main-content">
       <div class="container">
-        <div
-          class="page-header d-flex justify-content-between align-items-center"
-        >
+
+     
+
+        <div class="page-header d-flex justify-content-between align-items-center">
           <h1>Mis Tareas</h1>
+          <!-- Botón para abrir modal -->
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#addTaskModal"
+          >
+            <i class="bi bi-plus-circle"></i> Nueva Tarea
+          </button>
         </div>
 
         <div id="tasks-content">
+           
           <div class="empty-state">
             <i class="bi bi-check-circle empty-state-icon"></i>
             <h3>No tienes tareas pendientes</h3>
@@ -58,9 +68,12 @@
             >
               <i class="bi bi-plus-lg"></i> Agregar Primera Tarea
             </button>
+
           </div>
-          <!-- Aquí se insertarán las tareas dinámicamente -->
-          <div id="tasks-list" class="tasks-list"></div>
+           <!-- Aquí se insertarán las tareas dinámicamente -->
+           <div id="tasks-list" class="tasks-list"></div>
+
+
         </div>
       </div>
     </main>

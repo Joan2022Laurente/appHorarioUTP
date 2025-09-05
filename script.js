@@ -529,8 +529,92 @@ document.addEventListener("DOMContentLoaded", () => {
   window.app = new UniversityScheduleApp();
 });
 
+// Carga el navbar y luego configura el efecto de scroll
 fetch("navbar.html")
   .then((response) => response.text())
   .then((data) => {
     document.getElementById("navbar").innerHTML = data;
+    // Espera un momento a que el DOM actualice y luego configura el scroll
+    setTimeout(setupNavbarScrollEffect, 50);
+  })
+  .catch(error => console.error("Error cargando navbar:", error));
+
+function setupNavbarScrollEffect() {
+  let lastScroll = 0;
+  const navbar = document.querySelector('.navbar');
+
+  if (!navbar) {
+    console.error("Navbar no encontrado");
+    return;
+  }
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll <= 0) {
+      navbar.style.transform = 'translateY(0)';
+      return;
+    }
+
+    if (currentScroll > lastScroll && !navbar.classList.contains('navbar-hidden')) {
+      navbar.style.transform = 'translateY(-100%)';
+      navbar.classList.add('navbar-hidden');
+    } else if (currentScroll < lastScroll && navbar.classList.contains('navbar-hidden')) {
+      navbar.style.transform = 'translateY(0)';
+      navbar.classList.remove('navbar-hidden');
+    }
+
+    lastScroll = currentScroll;
   });
+}
+
+
+  // task----------------------------------------------
+// task----------------------------------------------
+
+// Renderiza TODAS las tareas en el contenedor #tasks-list
+function renderTasks() {
+  const tasksList = document.getElementById("tasks-list");
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  // Limpiar lista antes de renderizar
+  tasksList.innerHTML = "";
+
+  tasks.forEach((task) => {
+    const taskItem = document.createElement("div");
+    taskItem.className = "task-item card mb-3";
+
+    taskItem.innerHTML = `
+      <div class="card-body">
+        <h5 class="card-title">${task.title}</h5>
+        <p class="card-text">${task.description || ""}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted">${task.dueDate || "Sin fecha"}</small>
+          <button class="btn btn-sm btn-danger delete-task">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Evento eliminar
+    taskItem.querySelector(".delete-task").addEventListener("click", () => {
+      const updatedTasks = tasks.filter((t) => t.id !== task.id);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+      renderTasks(); // refrescar lista
+    });
+
+    tasksList.appendChild(taskItem);
+  });
+
+  
+}
+
+// Llamar a renderTasks() al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  renderTasks();
+});
+
+
+
+
